@@ -22,10 +22,10 @@ Use this file as a fast orientation when editing or answering questions about th
 - **Wins CSVs:** `Constituency` is often `NAME(N)`; parse trailing `(N)` to get `const_no` when merging with statewise or candidate files.
 - **Noise:** `TN_AC2026_statewise_by_constituency.csv` may include trailing `col_*` columns from HTML glue; prefer documented snake_case columns (`README.md`).
 
-## Local-only tooling (do not assume in git)
+## Public scope
 
-- **`notebook.ipynb`** may exist on a maintainer machine for **private** regeneration; it is listed in **`.gitignore`** and is **not** part of the public dataset story. Do not add `requirements.txt` or notebook-run instructions unless the maintainer explicitly wants them back.
-- There is **no** checked-in scraper package beyond optional local notebook work.
+- This repository is published as a **dataset + documentation** package.
+- Keep `README.md`, `NOTICE`, and file/folder descriptions aligned with what is actually versioned and visible to public users.
 
 ## Conventions for changes
 
