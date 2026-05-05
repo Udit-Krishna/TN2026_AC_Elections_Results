@@ -1,6 +1,41 @@
 # Tamil Nadu AC May 2026 — scraped CSV layout
 
-This repo scrapes published tables from the Election Commission of India (“TN”, state code **S22**) into CSV files under a few folders. Paths below are relative to the project root (same as `OUTPUT_ROOT` in `notebook.ipynb`).
+This repository distributes CSV extracts of published Tamil Nadu Assembly Constituency results (“TN”, state code **S22**) under the folders below. Paths are relative to the project root.
+
+---
+
+## Disclaimer and affiliation
+
+This project is **not affiliated with or endorsed by** the Election Commission of India (ECI). Published electoral totals remain official products of ECI (see **`NOTICE`**). Anything extracted here is provided **as is**, without warranty of correctness or completeness for any purpose—including journalism, litigation, or campaign messaging—and should be checked against [results.eci.gov.in](https://results.eci.gov.in/) before reliance.
+
+Scraping can stop working whenever URLs or HTML change; snapshot CSVs may drift unless regenerated.
+
+---
+
+## License
+
+Documentation in this repository (for example `README.md`) is released under the [MIT License](LICENSE).
+
+Bundled or regenerated CSV extracts derive from official publications as noted in **`NOTICE`**; cite **both** this repository (when publishing derivatives you built here) **and** the ECI portal as the originating governmental source.
+
+---
+
+## Citation
+
+Suggested wording:
+
+> Derived counts assembled using **TN-2026-ECI-Scraping** (paste your repository URL here), extracting tables published by the Election Commission of India at https://results.eci.gov.in/.
+
+Replace with your GitHub URL / Zenodo DOI if you mint tags or archival deposits.
+
+---
+
+## Methodology and known limitations
+
+- Figures were extracted from ECI-published HTML; some non-Latin or malformed header/name rows were dropped during consolidation (English-focused sanity checks).
+- **Statewide CSV**: trailing **`col_*`** columns mirror stray glued markup fragments (“party wise state trends…”). Prefer documented snake_case columns for joins (see below).
+- **Party naming**: abbreviations differ across vote-share exports vs wins CSV vs candidate exports—normalize explicitly before merges (`party_abbr`, full strings).
+- **Constituency label**: wins CSV uses `NAME(const_no)`; statewise uses bare names plus **`const_no`**—always align joins on **`const_no`** (1–234).
 
 ---
 
@@ -146,9 +181,3 @@ cand_all = pd.concat([pd.read_csv(p) for p in paths], ignore_index=True)
 state = pd.read_csv("TN_AC2026_general_statistics/TN_AC2026_statewise_by_constituency.csv")
 combined = cand_all.merge(state, on="const_no", how="left", suffixes=("", "_statewise"))
 ```
-
----
-
-## Regenerating outputs
-
-Run **`notebook.ipynb`** from the top: **cell 0** defines paths and helpers; later cells scrape detail pages, merge party wins, build statewise + **`TN_AC2026_constituency_no_to_name.csv`**, and constituency-wise candidates. Scraping uses Playwright against `results.eci.gov.in`; blocking or HTML changes may require notebook updates.

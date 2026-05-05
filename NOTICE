@@ -1,0 +1,21 @@
+Data provenance and attribution
+===============================
+
+Tabulated election figures published in the CSV outputs under this repository
+were sourced from the Electoral Commission of India’s public results website at:
+
+  https://results.eci.gov.in/
+
+(or successor URLs under that domain), including paths consistent with the May 2026
+Tamil Nadu Assembly Constituency results (for example `ResultAcGenMay2026/`).
+
+Those electoral counts and labels remain official publications of the Election
+Commission of India or relevant electoral authorities. These CSV extracts were produced
+from HTML tables published there; this repository does not
+represent endorsement by ECI and does not claim ownership over underlying tabulated results.
+
+Before citing aggregated counts or derivatives for editorial, compliance, or
+legal contexts, verify figures against the live portal or gazetted notifications.
+
+See README.md for limitations on extraction fidelity (filters applied to noisy rows,
+extra `col_*` columns from markup glue text, party naming inconsistencies across exports).
